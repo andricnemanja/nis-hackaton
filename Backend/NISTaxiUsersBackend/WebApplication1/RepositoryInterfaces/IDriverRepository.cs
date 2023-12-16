@@ -4,6 +4,7 @@ namespace WebApplication1.RepositoryInterfaces
 {
 	public interface IDriverRepository
 	{
+		Driver GetDriverByPhoneNumber(string phoneNumber);
 		ICollection<Driver> GetDrivers();
 
 		Driver GetDriver(int id);

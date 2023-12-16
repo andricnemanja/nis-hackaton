@@ -22,6 +22,11 @@ namespace WebApplication1.Repository
 			return driver;
 		}
 
+		public Driver GetDriverByPhoneNumber(string phoneNumber)
+		{
+			return _context.Drivers.FirstOrDefault(d => d.PhoneNumber == phoneNumber);
+		}
+
 		public string GetDriversName(int id)
 		{
 			return _context.Drivers.Where(d => d.Id == id).FirstOrDefault().DriverName;

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebApplication1.Authentication;
 using WebApplication1.Dto;
 using WebApplication1.Entities;
 using WebApplication1.RepositoryInterfaces;
@@ -10,10 +11,12 @@ namespace WebApplication1.Controllers
 	public class DriverController : Controller
 	{
 		private readonly IDriverRepository driverRepository;
+		private readonly IAuthenticationService authenticationService;
 
-		public DriverController(IDriverRepository driverRepository)
+		public DriverController(IDriverRepository driverRepository, IAuthenticationService authenticationService)
 		{
 			this.driverRepository = driverRepository;
+			this.authenticationService = authenticationService;
 		}
 
 		[HttpGet]
@@ -105,24 +108,24 @@ namespace WebApplication1.Controllers
 			return Ok(secondAmountLeft);
 		}
 
-		//[HttpPost("login")]
-		//public async Task<IActionResult> Login([FromBody] DriverLoginDto dto)
-		//{
-		//	try
-		//	{
-		//		//var result = await
-		//		//if ()
-		//		//{
+		[HttpPost("login")]
+		public IActionResult Login([FromBody] DriverLoginDto dto)
+		{
+			try
+			{
+				var token = authenticationService.Authenticate(dto.PhoneNumber, dto.TaxiLicence);
+				if (token == "")
+				{
+					return Unauthorized();
+				}
+				return Ok(token);
 
-		//		//}
-		//		//return Ok(result);
+			}
+			catch (Exception ex)
+			{
+				return Unauthorized(ex.Message);
+			}
 
-		//	}
-		//	catch (Exception ex)
-		//	{
-		//		return Unauthorized(ex.Message);
-		//	}
-
-		//}
+		}
 	}
 }
