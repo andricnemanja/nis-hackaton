@@ -13,24 +13,9 @@ export default function ReceiptsScreen() {
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false} style={styles.scrollView}>
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text style={styles.nameText}>Michigan Michigenovic</Text>
-        <Text style={styles.fuelText}>Evro dizel/OPTI dizel</Text>
+        <Text style={styles.nameText}>Petar Petrovic</Text>
       </View>
     
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text style={styles.nameText}>Preostalo dizela: 600L</Text>
-      </View>
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Pressable style={styles.shareBtn} onPress={() => console.log("Button Pressed")}>
-          <Text style={styles.shareBtnText}>Podeli sa prijateljima</Text>
-        </Pressable>
-      </View>
-      <View style={styles.promotionsView}>
-        <Text style={styles.nameText}>Promocije</Text>
-        <View style={styles.promotion}>
-
-        </View>
-      </View>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
           <Pressable style={styles.shareBtn} onPress={() => logout()}>
             <Text style={styles.shareBtnText}>Odjavi se</Text>

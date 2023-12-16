@@ -6,17 +6,49 @@ export default function ReceiptsScreen() {
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false} style={styles.scrollView}>
       <View style={styles.receiptView}>
+
         <View style={styles.receiptBox}>
           <Text style={styles.dateText}>20.11.2023, 15:12</Text>
           <Text style={styles.gasStationText}>B.S. Novi Sad 1</Text>
           <Text style={styles.fuelTypeText}>OPTI BMB 95</Text>
+
           <View style={{flexDirection: 'row', justifyContent: 'start', alignItems: 'center', marginTop: 10}}>
             <Image source={require('./../assets/fuelStation.png')} style={styles.icon}/>
             <Text style={styles.fuelPrice}>50l</Text>
           </View>
           <View style={{flexDirection: 'row', justifyContent: 'start', alignItems: 'center', marginTop: 10}}>
             <Image source={require('./../assets/money.png')} style={styles.icon}/>
-            <Text style={styles.fuelPrice}>8000 RSD</Text>
+            <Text style={styles.fuelPrice}>9000 RSD</Text>
+          </View>
+        </View>
+
+        <View style={styles.receiptBox}>
+          <Text style={styles.dateText}>19.11.2023, 12:12</Text>
+          <Text style={styles.gasStationText}>B.S. Novi Beograd 1</Text>
+          <Text style={styles.fuelTypeText}>OPTI BMB 95</Text>
+
+          <View style={{flexDirection: 'row', justifyContent: 'start', alignItems: 'center', marginTop: 10}}>
+            <Image source={require('./../assets/fuelStation.png')} style={styles.icon}/>
+            <Text style={styles.fuelPrice}>50l</Text>
+          </View>
+          <View style={{flexDirection: 'row', justifyContent: 'start', alignItems: 'center', marginTop: 10}}>
+            <Image source={require('./../assets/money.png')} style={styles.icon}/>
+            <Text style={styles.fuelPrice}>7300 RSD</Text>
+          </View>
+        </View>
+
+        <View style={styles.receiptBox}>
+          <Text style={styles.dateText}>10.11.2023, 18:12</Text>
+          <Text style={styles.gasStationText}>B.S. Novi Sad 1</Text>
+          <Text style={styles.fuelTypeText}>OPTI BMB 95</Text>
+
+          <View style={{flexDirection: 'row', justifyContent: 'start', alignItems: 'center', marginTop: 10}}>
+            <Image source={require('./../assets/fuelStation.png')} style={styles.icon}/>
+            <Text style={styles.fuelPrice}>55l</Text>
+          </View>
+          <View style={{flexDirection: 'row', justifyContent: 'start', alignItems: 'center', marginTop: 10}}>
+            <Image source={require('./../assets/money.png')} style={styles.icon}/>
+            <Text style={styles.fuelPrice}>8300 RSD</Text>
           </View>
         </View>
         

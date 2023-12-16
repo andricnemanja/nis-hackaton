@@ -11,6 +11,7 @@ namespace WebApplication1.Dto
 		public string DriverName { get; set; }
 
 		public string TaxiLicence { get; set; }
+		public string TaxiCardNumber { get; set; }
 
 		public double AmountPouredFirst { get; set; }
 
@@ -24,8 +25,8 @@ namespace WebApplication1.Dto
 
 		public double SecondFuelLeft { get; set; }
 
-        public DriverDto(Driver driver)
-        {
+		public DriverDto(Driver driver)
+		{
 			Id = driver.Id;
 			PhoneNumber = driver.PhoneNumber;
 			DriverName = driver.DriverName;
@@ -36,6 +37,7 @@ namespace WebApplication1.Dto
 			FuelNameSecond = driver.FuelCombination.Fuel2.Name;
 			FirstFuelLeft = CalculateFirstFuelAmount(driver);
 			SecondFuelLeft = CalculateSecondFuelAmount(driver);
+			TaxiCardNumber = driver.TaxiCardNumber;
 		}
 
 		private double CalculateFirstFuelAmount(Driver driver)

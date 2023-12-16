@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, ScrollView, Image, Button, Pressable, TextInput
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useState } from 'react';
+import Toast from 'react-native-toast-message';
 
 export default function LoginScreen({ navigation }) {
   const[phoneNumber, setPhoneNumber] = useState("");
@@ -50,6 +51,7 @@ export default function LoginScreen({ navigation }) {
       </View>
         <StatusBar style="auto" />
       </View>
+      <Toast />
     </View>
   );
 }

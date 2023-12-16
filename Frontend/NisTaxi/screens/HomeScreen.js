@@ -2,15 +2,29 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ScrollView, Image, Button, Pressable, Dimensions } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import QRCodeStyled from 'react-native-qrcode-styled';
+import { useEffect } from 'react';
+import { getUserById } from '../services/userService';
+import jwt_decode from "jwt-decode";
+import { AuthContext } from '../context/AuthContext';
+import { useContext } from 'react';
+import { useState } from 'react';
 
 const userIcon = require('./../assets/userIcon.png');
 const logoImg = require('./../assets/logo.png');
 const receiptIcon = require('./../assets/receipt.png');
 
 export default function HomeScreen({ navigation }) {
+  const [user, setUser] = useState([]);
+  const { userId } = useContext(AuthContext);
+
+  useEffect(() => {
+    getUserById(userId, setUser);
+  }, []);
+
+
   return (
     <View style={styles.container}>
-      <ScrollView   showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false} style={styles.scrollView}>
+      <ScrollView showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false} style={styles.scrollView}>
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'flex-end'}}>
         <Pressable onPress={() => navigation.navigate("Receipts")}>
           <Image source={receiptIcon} style={styles.receiptIcon}/>
@@ -19,16 +33,18 @@ export default function HomeScreen({ navigation }) {
       <Pressable onPress={() => navigation.navigate("Account")}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
             <Image source={userIcon} style={styles.userIcon}></Image>
-            <Text style={styles.nameText}>Michigan Michigenovic</Text>
-            <Text style={styles.fuelText}>Evro dizel/OPTI dizel</Text>
+            <Text style={styles.nameText}>{user.driverName}</Text>
+            <Text style={styles.fuelText}>{user.fuelNameFirst}</Text>
+            <Text style={styles.fuelText}>{user.fuelNameSecond}</Text>
+
         </View>
       </Pressable>
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <QRCodeStyled
-          data={'Idemo michigen Idemo michigen michigen'}
+          data={user.taxiCardNumber}
           style={styles.svg}
           padding={20}
-          pieceSize={8}
+          pieceSize={12}
           color={'#000'}
           errorCorrectionLevel={'H'}
           innerEyesOptions={{
@@ -49,7 +65,8 @@ export default function HomeScreen({ navigation }) {
         />
       </View>
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text style={styles.nameText}>Preostalo dizela: 600L</Text>
+        <Text style={styles.nameText}>Prvog goriva do limita: {user.firstFuelLeft}L</Text>
+        <Text style={styles.nameText}>Drugog goriva do limita: {user.secondFuelLeft}L</Text>
       </View>
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <Pressable style={styles.shareBtn} onPress={() => console.log("Button Pressed")}>
@@ -59,8 +76,11 @@ export default function HomeScreen({ navigation }) {
       <View style={styles.promotionsView}>
         <Text style={styles.nameText}>Promocije</Text>
         <View style={styles.promotion}>
-
+          <Image source={require('./../assets/kafa.png')} style={styles.kafaIcon}/>
+          <Text style={styles.nameText}> 2 + 1 Kafa gratis</Text>
         </View>
+        <View style={styles.whiteSpace}>
+          </View>
       </View>
         <StatusBar style="auto" />
       </ScrollView>
@@ -137,6 +157,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   promotion:{
+    flexDirection: 'row', justifyContent: 'start', alignItems: 'center', marginTop: 10,
     marginTop: 20,
     width: '100%',
     height: 150,
@@ -147,4 +168,13 @@ const styles = StyleSheet.create({
     width:40,
     height:40,
   },
+  kafaIcon:{
+    width:130,
+    height:110,
+    marginLeft: 20,
+    marginTop: 20,
+  },
+  whiteSpace:{
+    height:10,
+  }
 });

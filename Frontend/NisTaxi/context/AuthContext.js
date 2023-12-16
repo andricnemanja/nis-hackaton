@@ -1,31 +1,43 @@
 import React, { createContext, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
+import Toast from 'react-native-toast-message';
+import jwt_decode from "jwt-decode";
 
 export const AuthContext = createContext();
+const BASE_URL = 'https://fe9b-77-243-22-101.ngrok.io';
+
 
 export const AuthProvider = ({ children }) => {
     const [isLoading, setIsLoading] = React.useState(false);
     const [userToken, setUserToken] = React.useState(null);
+    const [userId, setUserId] = React.useState(1);
 
-    const login = (phoneNumber, taxiLicence) => {
+    const showToast = () => {
+        Toast.show({
+          type: 'error',
+          text1: 'Pogrešni podaci',
+        })};
+
+    const login = async (phoneNumber, taxiLicence) => {
         setIsLoading(true);
 
-        // axios.post('http://localhost:8080/login', {
-        //     phoneNumber: phoneNumber,
-        //     taxiLicence: taxiLicence
-        // })
-        // .then((response) => {
-        //     console.log(response);
-        //     setUserToken(response.data.token);
-        //     AsyncStorage.setItem('userToken', userToken);
-        // })
-        // .catch((error) => {
-        //     console.log(error);
-        // });
+        axios.post('https://fe9b-77-243-22-101.ngrok.io/api/Driver/login', {
+            phoneNumber: phoneNumber,
+            taxiLicence: taxiLicence
+        })
+        .then((response) => {
+            setUserToken(response.data);
+            AsyncStorage.setItem('userToken', response.data);
+            //setUserId(jwt_decode(response.data).Id);
+            //AsyncStorage.setItem('userId', jwt_decode(response.data).Id);
+        })
+        .catch((error) => {
+            if (error.response && error.response.status === 401) {
+                showToast();
+            }
+        });
 
-        setUserToken('userToken');
-        AsyncStorage.setItem('userToken', 'userToken');
         setIsLoading(false);
     }
 
@@ -48,14 +60,17 @@ export const AuthProvider = ({ children }) => {
         }
     }
     
+    const getUserId = async () => {
+        return userId;
+    }
 
     useEffect(() => {
         getUserToken();
     }, [])
 
     return (
-        <AuthContext.Provider value={{login, logout, isLoading, userToken}}>
+        <AuthContext.Provider value={{login, logout, isLoading, userToken, userId, getUserId}}>
         {children}
         </AuthContext.Provider>
     );
-    }
+}
