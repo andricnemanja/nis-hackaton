@@ -1,36 +1,50 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator, createStackNavigator } from '@react-navigation/native-stack';
+import { StyleSheet, Text, View, ScrollView, Image, Button, Pressable } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import QRCodeStyled from 'react-native-qrcode-styled';
-import HomeScreen from './screens/HomeScreen';
-import ReceiptsScreen from './screens/ReceiptsScreen';
-import AccountScreen from './screens/AccountScreen';
-
-const Stack = createNativeStackNavigator();
 
 
-export default function App() {
+export default function ReceiptsScreen() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }}/>
-        <Stack.Screen name="Receipts" component={ReceiptsScreen} />
-        <Stack.Screen name="Account" component={AccountScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <View style={styles.container}>
+      <ScrollView showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false} style={styles.scrollView}>
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Text style={styles.nameText}>Michigan Michigenovic</Text>
+        <Text style={styles.fuelText}>Evro dizel/OPTI dizel</Text>
+      </View>
+    
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Text style={styles.nameText}>Preostalo dizela: 600L</Text>
+      </View>
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Pressable style={styles.shareBtn} onPress={() => console.log("Button Pressed")}>
+          <Text style={styles.shareBtnText}>Podeli sa prijateljima</Text>
+        </Pressable>
+      </View>
+      <View style={styles.promotionsView}>
+        <Text style={styles.nameText}>Promocije</Text>
+        <View style={styles.promotion}>
+
+        </View>
+      </View>
+        <StatusBar style="auto" />
+      </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    width: '100%',
     backgroundColor: '#fff',
-    padding: 0,
+    paddingLeft: 20,
+    paddingRight: 20,
     paddingTop: 80,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  scrollView:{
+    width: '100%',
   },
   root: {
     justifyContent: 'center',
