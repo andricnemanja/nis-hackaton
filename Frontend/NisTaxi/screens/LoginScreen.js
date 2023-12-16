@@ -44,7 +44,7 @@ export default function LoginScreen({ navigation }) {
         }
       </View>
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Pressable style={styles.loginBtn} onPress={() => login(email, password)}>
+        <Pressable style={styles.loginBtn} onPress={() => login(phoneNumber, taxiLicence)}>
           <Text style={styles.loginBtnText}>Prijavi se</Text>
         </Pressable>
       </View>

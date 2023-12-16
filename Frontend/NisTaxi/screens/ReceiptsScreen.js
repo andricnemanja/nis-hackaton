@@ -1,33 +1,27 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ScrollView, Image, Button, Pressable } from 'react-native';
-import QRCode from 'react-native-qrcode-svg';
-import QRCodeStyled from 'react-native-qrcode-styled';
-
 
 export default function ReceiptsScreen() {
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false} style={styles.scrollView}>
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text style={styles.nameText}>Michigan Michigenovic</Text>
-        <Text style={styles.fuelText}>Evro dizel/OPTI dizel</Text>
-      </View>
-    
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text style={styles.nameText}>Preostalo dizela: 600L</Text>
-      </View>
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Pressable style={styles.shareBtn} onPress={() => console.log("Button Pressed")}>
-          <Text style={styles.shareBtnText}>Podeli sa prijateljima</Text>
-        </Pressable>
-      </View>
-      <View style={styles.promotionsView}>
-        <Text style={styles.nameText}>Promocije</Text>
-        <View style={styles.promotion}>
-
+      <View style={styles.receiptView}>
+        <View style={styles.receiptBox}>
+          <Text style={styles.dateText}>20.11.2023, 15:12</Text>
+          <Text style={styles.gasStationText}>B.S. Novi Sad 1</Text>
+          <Text style={styles.fuelTypeText}>OPTI BMB 95</Text>
+          <View style={{flexDirection: 'row', justifyContent: 'start', alignItems: 'center', marginTop: 10}}>
+            <Image source={require('./../assets/fuelStation.png')} style={styles.icon}/>
+            <Text style={styles.fuelPrice}>50l</Text>
+          </View>
+          <View style={{flexDirection: 'row', justifyContent: 'start', alignItems: 'center', marginTop: 10}}>
+            <Image source={require('./../assets/money.png')} style={styles.icon}/>
+            <Text style={styles.fuelPrice}>8000 RSD</Text>
+          </View>
         </View>
+        
       </View>
-        <StatusBar style="auto" />
+      <StatusBar style="auto" />
       </ScrollView>
     </View>
   );
@@ -39,73 +33,49 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     paddingLeft: 20,
     paddingRight: 20,
-    paddingTop: 80,
     alignItems: 'center',
     justifyContent: 'center',
   },
   scrollView:{
     width: '100%',
   },
-  root: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  svg: {
+  receiptView:{
     marginTop: 20,
-    backgroundColor: '#fff',
-    borderRadius: 20,
-    overflow: 'hidden',
   },
-  logoContainer: {
-    position: 'absolute',
-    width: 88,
-    height: 88,
-    backgroundColor: '#fff',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  logo: {
-    width: '90%',
-    height: '90%',
-    top: -2,
-  },
-  userIcon:{
-    width: 50,
-    height: 50,
-  },
-  nameText:{
-    fontSize: 22,
-    fontWeight: '700',
-    marginTop: 5,
-  },
-  fuelText:{
-    fontSize: 15,
-    fontWeight: '400',
-    color: '#8F8F8F',
-  },
-  shareBtn:{
-    marginTop: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 15,
-    paddingHorizontal: 32,
-    width: '100%',
-    borderRadius: 4,
-    elevation: 4,
-    backgroundColor: '#F5BF24',
-  },
-  shareBtnText:{
-    fontSize: 22,
-    fontWeight: '700',
-  },
-  promotionsView:{
-    marginTop: 40,
-  },
-  promotion:{
+  receiptBox:{
+    paddingTop: 20,
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingBottom: 20,
     marginTop: 20,
     width: '100%',
-    height: 150,
+    height: 180,
     backgroundColor: '#F5BF24',
     borderRadius: 10,
-  }
+  },
+  dateText:{
+    fontSize: 16,
+    fontWeight: '400',
+    color: '#fff',
+  },
+  gasStationText:{
+    fontSize: 24,
+    fontWeight: '700',
+    color: '#fff',
+  },
+  fuelTypeText:{
+    fontSize: 16,
+    fontWeight: '300',
+    color: '#fff',
+  },
+  icon:{
+    width: 15,
+    height: 15,
+  },
+  fuelPrice:{
+    fontSize: 17,
+    fontWeight: '400',
+    color: '#fff',
+    marginLeft: 7,
+  },
 });
