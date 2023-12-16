@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WebApplication1.Migrations
 {
     /// <inheritdoc />
-    public partial class FirstMigration : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -65,12 +65,15 @@ namespace WebApplication1.Migrations
                     DriverName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PostalCode = table.Column<int>(type: "int", nullable: false),
                     Place = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TaxiLicence = table.Column<int>(type: "int", nullable: false),
-                    NumberOfId = table.Column<int>(type: "int", nullable: false),
+                    TaxiCardNumber = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),
+                    TaxiLicence = table.Column<string>(type: "nvarchar(6)", maxLength: 6, nullable: false),
+                    NumberOfId = table.Column<string>(type: "nvarchar(9)", maxLength: 9, nullable: false),
                     DriverStatus = table.Column<int>(type: "int", nullable: false),
                     SMSNotification = table.Column<bool>(type: "bit", nullable: false),
                     EmailNotification = table.Column<bool>(type: "bit", nullable: false),
-                    FuelCombinationId = table.Column<int>(type: "int", nullable: false)
+                    FuelCombinationId = table.Column<int>(type: "int", nullable: false),
+                    AmountPouredFirst = table.Column<double>(type: "float", nullable: false),
+                    AmountPouredSecond = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -80,7 +83,7 @@ namespace WebApplication1.Migrations
                         column: x => x.FuelCombinationId,
                         principalTable: "FuelCombinations",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -93,7 +96,8 @@ namespace WebApplication1.Migrations
                     FuelId = table.Column<int>(type: "int", nullable: false),
                     Amount = table.Column<double>(type: "float", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
-                    DateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PlaceOfTransaction = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -109,7 +113,7 @@ namespace WebApplication1.Migrations
                         column: x => x.FuelId,
                         principalTable: "Fuels",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(

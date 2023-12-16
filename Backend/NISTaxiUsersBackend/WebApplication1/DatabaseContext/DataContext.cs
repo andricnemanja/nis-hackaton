@@ -5,19 +5,20 @@ namespace WebApplication1.DatabaseContext
 {
 	public class DataContext : DbContext
 	{
-		public DataContext(DbContextOptions options) 
+		public DataContext(DbContextOptions options)
 			: base(options)
 		{
-
+			this.Database.SetConnectionString("server = (localdb)\\ProjectModels; Database = NisTaxi; MultipleActiveResultSets = true; TrustServerCertificate = True; Trusted_Connection = True");
 		}
 
-		public DbSet<Driver> Drivers => Set<Driver>();
+		public DbSet<Driver> Drivers { get; set; }
 
-		public DbSet<Fuel> Fuels => Set<Fuel>();
+		public DbSet<Fuel> Fuels { get; set; }
 
-		public DbSet<FuelCombination> FuelCombinations => Set<FuelCombination>();
-		
-		public DbSet<TaxiTransaction> Transactions => Set<TaxiTransaction>();
+		public DbSet<FuelCombination> FuelCombinations { get; set; }
+
+		public DbSet<TaxiTransaction> Transactions { get; set; }
+
 
 	}
 }

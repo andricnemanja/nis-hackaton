@@ -30,6 +30,12 @@ namespace WebApplication1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<double>("AmountPouredFirst")
+                        .HasColumnType("float");
+
+                    b.Property<double>("AmountPouredSecond")
+                        .HasColumnType("float");
+
                     b.Property<string>("CompanyName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -69,6 +75,11 @@ namespace WebApplication1.Migrations
 
                     b.Property<bool>("SMSNotification")
                         .HasColumnType("bit");
+
+                    b.Property<string>("TaxiCardNumber")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("nvarchar(16)");
 
                     b.Property<string>("TaxiLicence")
                         .IsRequired()
@@ -154,6 +165,10 @@ namespace WebApplication1.Migrations
 
                     b.Property<int>("FuelId")
                         .HasColumnType("int");
+
+                    b.Property<string>("PlaceOfTransaction")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");

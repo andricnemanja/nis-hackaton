@@ -13,6 +13,9 @@ namespace WebApplication1.Entities
 		public Driver Driver { get; set; }
 
 		[Required]
+		public int FuelId { get; set; }
+
+		[ForeignKey(nameof(FuelId))]
 		public Fuel Fuel { get; set; }
 
 		[Required]
@@ -23,5 +26,8 @@ namespace WebApplication1.Entities
 
 		[Required]
 		public DateTime DateTime { get; set; }
+
+		[Required]
+		public string PlaceOfTransaction { get; set; }
 	}
 }

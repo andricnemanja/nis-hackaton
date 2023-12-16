@@ -1,6 +1,8 @@
 using WebApplication1.DatabaseContext;
 using System.Configuration;
 using Microsoft.EntityFrameworkCore;
+using WebApplication1.RepositoryInterfaces;
+using WebApplication1.Repository;
 
 namespace WebApplication1
 {
@@ -9,6 +11,12 @@ namespace WebApplication1
 		public static void Main(string[] args)
 		{
 			var builder = WebApplication.CreateBuilder(args);
+
+			builder.Services.AddControllers();
+
+			builder.Services.AddScoped<IDriverRepository, DriverRepository>();
+
+			builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
 
 			builder.Services.AddDbContext<DataContext>(options =>
 				options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));

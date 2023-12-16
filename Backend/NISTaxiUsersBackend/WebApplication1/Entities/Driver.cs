@@ -28,6 +28,10 @@ namespace WebApplication1.Entities
 		public string Place { get; set; }
 
 		[Required]
+		[MaxLength(16)]
+		public string TaxiCardNumber { get; set; }
+
+		[Required]
 		[MaxLength(6)]
 		public string TaxiLicence { get; set; }
 
@@ -43,6 +47,15 @@ namespace WebApplication1.Entities
 		public bool EmailNotification { get; set; }
 
 		[Required]
+		public int FuelCombinationId { get; set; }
+
+		[ForeignKey(nameof(FuelCombinationId))]
 		public FuelCombination FuelCombination { get; set; }
+
+		[Required]
+		public double AmountPouredFirst { get; set; }
+
+		[Required]
+		public double AmountPouredSecond { get; set; }
 	}
 }

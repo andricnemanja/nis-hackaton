@@ -12,8 +12,8 @@ using WebApplication1.DatabaseContext;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231216035727_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20231216103935_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,6 +32,12 @@ namespace WebApplication1.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<double>("AmountPouredFirst")
+                        .HasColumnType("float");
+
+                    b.Property<double>("AmountPouredSecond")
+                        .HasColumnType("float");
 
                     b.Property<string>("CompanyName")
                         .IsRequired()
@@ -54,8 +60,10 @@ namespace WebApplication1.Migrations
                     b.Property<int>("FuelCombinationId")
                         .HasColumnType("int");
 
-                    b.Property<int>("NumberOfId")
-                        .HasColumnType("int");
+                    b.Property<string>("NumberOfId")
+                        .IsRequired()
+                        .HasMaxLength(9)
+                        .HasColumnType("nvarchar(9)");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
@@ -71,8 +79,15 @@ namespace WebApplication1.Migrations
                     b.Property<bool>("SMSNotification")
                         .HasColumnType("bit");
 
-                    b.Property<int>("TaxiLicence")
-                        .HasColumnType("int");
+                    b.Property<string>("TaxiCardNumber")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("nvarchar(16)");
+
+                    b.Property<string>("TaxiLicence")
+                        .IsRequired()
+                        .HasMaxLength(6)
+                        .HasColumnType("nvarchar(6)");
 
                     b.HasKey("Id");
 
@@ -153,6 +168,10 @@ namespace WebApplication1.Migrations
 
                     b.Property<int>("FuelId")
                         .HasColumnType("int");
+
+                    b.Property<string>("PlaceOfTransaction")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
