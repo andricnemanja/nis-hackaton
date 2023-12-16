@@ -8,14 +8,21 @@ import jwt_decode from "jwt-decode";
 import { AuthContext } from '../context/AuthContext';
 import { useContext } from 'react';
 import { useState } from 'react';
+import { Linking } from 'react-native';
+
 
 const userIcon = require('./../assets/userIcon.png');
 const logoImg = require('./../assets/logo.png');
 const receiptIcon = require('./../assets/receipt.png');
 
+
 export default function HomeScreen({ navigation }) {
   const [user, setUser] = useState([]);
   const { userId } = useContext(AuthContext);
+
+  loadInBrowser = () => {
+    Linking.openURL("https://www.nisgazprom.rs/sr/programi-lojalnosti/nis-taxi-kartica/").catch(err => console.error("Couldn't load page", err));
+  };
 
   useEffect(() => {
     getUserById(userId, setUser);
@@ -69,7 +76,7 @@ export default function HomeScreen({ navigation }) {
         <Text style={styles.nameText}>Drugog goriva do limita: {user.secondFuelLeft}L</Text>
       </View>
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Pressable style={styles.shareBtn} onPress={() => console.log("Button Pressed")}>
+        <Pressable style={styles.shareBtn} onPress={() => loadInBrowser()}>
           <Text style={styles.shareBtnText}>Podeli sa prijateljima</Text>
         </Pressable>
       </View>
