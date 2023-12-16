@@ -7,19 +7,24 @@ import QRCodeStyled from 'react-native-qrcode-styled';
 import HomeScreen from './screens/HomeScreen';
 import ReceiptsScreen from './screens/ReceiptsScreen';
 import AccountScreen from './screens/AccountScreen';
+import { AuthProvider } from './context/AuthContext';
+import LoginScreen from './screens/LoginScreen';
 
 const Stack = createNativeStackNavigator();
 
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }}/>
-        <Stack.Screen name="Receipts" component={ReceiptsScreen} />
-        <Stack.Screen name="Account" component={AccountScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <AuthProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }}/>
+          <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }}/>
+          <Stack.Screen name="Account" component={AccountScreen} />
+          <Stack.Screen name="Receipts" component={ReceiptsScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>  
+    </AuthProvider>
   );
 }
 
