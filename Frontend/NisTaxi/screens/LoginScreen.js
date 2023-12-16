@@ -31,20 +31,20 @@ export default function LoginScreen({ navigation }) {
     
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'start'}}>
         <Text style={styles.fieldText}>Broj telefona</Text>
-        <TextInput style={styles.inputField} placeholder='+3816XXXXXXX' value={phoneNumber} onChangeText={setPhoneNumber}/>
+        <TextInput style={styles.inputField} placeholder='+3816XXXXXXX' value={phoneNumber} onChangeText={text => setPhoneNumber(text)}/>
         {
           errors.username && <Text style={{color: 'red'}}>{errors.username}</Text>
         }
       </View>
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'start', marginTop:10}}>
         <Text style={styles.fieldText}>Broj taksi dozvole</Text>
-        <TextInput style={styles.inputField} placeholder='XXXXX' value={taxiLicence} onChangeText={setTaxiLicence}/>
+        <TextInput style={styles.inputField} placeholder='XXXXX' value={taxiLicence} onChangeText={text => setTaxiLicence(text)}/>
         {
           errors.password && <Text style={{color: 'red'}}>{errors.password}</Text>
         }
       </View>
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Pressable style={styles.loginBtn} onPress={() => login()}>
+        <Pressable style={styles.loginBtn} onPress={() => login(email, password)}>
           <Text style={styles.loginBtnText}>Prijavi se</Text>
         </Pressable>
       </View>
