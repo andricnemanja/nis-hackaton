@@ -23,5 +23,8 @@ namespace WebApplication1.Entities
 
 		[Required]
 		public DateTime DateTime { get; set; }
+
+		[Required]
+		public string PlaceOfTransaction { get; set; }
 	}
 }

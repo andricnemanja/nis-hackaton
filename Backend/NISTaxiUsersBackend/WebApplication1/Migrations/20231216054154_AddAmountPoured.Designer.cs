@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication1.DatabaseContext;
 
@@ -11,9 +12,11 @@ using WebApplication1.DatabaseContext;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231216054154_AddAmountPoured")]
+    partial class AddAmountPoured
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,10 +33,7 @@ namespace WebApplication1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<double>("AmountPouredFirst")
-                        .HasColumnType("float");
-
-                    b.Property<double>("AmountPouredSecond")
+                    b.Property<double>("AmountPoured")
                         .HasColumnType("float");
 
                     b.Property<string>("CompanyName")
@@ -160,10 +160,6 @@ namespace WebApplication1.Migrations
 
                     b.Property<int>("FuelId")
                         .HasColumnType("int");
-
-                    b.Property<string>("PlaceOfTransaction")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");

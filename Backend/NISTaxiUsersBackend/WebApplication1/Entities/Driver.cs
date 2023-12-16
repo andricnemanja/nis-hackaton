@@ -44,5 +44,11 @@ namespace WebApplication1.Entities
 
 		[Required]
 		public FuelCombination FuelCombination { get; set; }
+
+		[Required]
+		public double AmountPouredFirst { get; set; }
+
+		[Required]
+		public double AmountPouredSecond { get; set; }
 	}
 }
