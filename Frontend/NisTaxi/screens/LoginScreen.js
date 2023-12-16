@@ -1,12 +1,27 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ScrollView, Image, Button, Pressable, TextInput } from 'react-native';
 import { useContext } from 'react';
-import QRCode from 'react-native-qrcode-svg';
-import QRCodeStyled from 'react-native-qrcode-styled';
 import { AuthContext } from '../context/AuthContext';
+import { useState } from 'react';
 
 export default function LoginScreen({ navigation }) {
-  const {user} = useContext(AuthContext);
+  const[phoneNumber, setPhoneNumber] = useState("");
+  const[taxiLicence, setTaxiLicence] = useState("");
+  const[errors, setErrors] = useState({});
+
+  const validateForm = () => {
+    let errors = {};
+
+    if(!phoneNumber) errors.phoneNumber = "Username is required";
+    if(!taxiLicence) errors.taxiLicence = "Password is required";
+
+    setErrors(errors);
+
+    return Object.keys(errors).length === 0;
+  }
+
+  const { login } = useContext(AuthContext);
+
   return (
     <View style={styles.container}>
       <View style={styles.scrollView}>
@@ -16,14 +31,20 @@ export default function LoginScreen({ navigation }) {
     
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'start'}}>
         <Text style={styles.fieldText}>Broj telefona</Text>
-        <TextInput style={styles.inputField} placeholder='+3816XXXXXXX'/>
+        <TextInput style={styles.inputField} placeholder='+3816XXXXXXX' value={phoneNumber} onChangeText={setPhoneNumber}/>
+        {
+          errors.username && <Text style={{color: 'red'}}>{errors.username}</Text>
+        }
       </View>
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'start', marginTop:10}}>
         <Text style={styles.fieldText}>Broj taksi dozvole</Text>
-        <TextInput style={styles.inputField} placeholder='XXXXX'/>
+        <TextInput style={styles.inputField} placeholder='XXXXX' value={taxiLicence} onChangeText={setTaxiLicence}/>
+        {
+          errors.password && <Text style={{color: 'red'}}>{errors.password}</Text>
+        }
       </View>
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Pressable style={styles.loginBtn} onPress={() => console.log("Button Pressed")}>
+        <Pressable style={styles.loginBtn} onPress={() => login()}>
           <Text style={styles.loginBtnText}>Prijavi se</Text>
         </Pressable>
       </View>

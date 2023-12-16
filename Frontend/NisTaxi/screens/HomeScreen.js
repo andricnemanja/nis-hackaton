@@ -6,7 +6,6 @@ import QRCodeStyled from 'react-native-qrcode-styled';
 const userIcon = require('./../assets/userIcon.png');
 const logoImg = require('./../assets/logo.png');
 const receiptIcon = require('./../assets/receipt.png');
-const WIDTH = Dimensions.get('window').width;
 
 export default function HomeScreen({ navigation }) {
   return (

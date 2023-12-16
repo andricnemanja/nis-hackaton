@@ -1,29 +1,23 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator, createStackNavigator } from '@react-navigation/native-stack';
 import QRCode from 'react-native-qrcode-svg';
 import QRCodeStyled from 'react-native-qrcode-styled';
-import HomeScreen from './screens/HomeScreen';
-import ReceiptsScreen from './screens/ReceiptsScreen';
-import AccountScreen from './screens/AccountScreen';
+import { NavigationContainer } from '@react-navigation/native';
+
 import { AuthProvider } from './context/AuthContext';
 import LoginScreen from './screens/LoginScreen';
+import { View, ActivityIndicator } from 'react-native';
+import AppNav from './navigation/AppNav';
+
 
 const Stack = createNativeStackNavigator();
 
 
 export default function App() {
+
   return (
     <AuthProvider>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }}/>
-          <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }}/>
-          <Stack.Screen name="Account" component={AccountScreen} />
-          <Stack.Screen name="Receipts" component={ReceiptsScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>  
+      <AppNav/>
     </AuthProvider>
   );
 }

@@ -2,9 +2,13 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ScrollView, Image, Button, Pressable } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import QRCodeStyled from 'react-native-qrcode-styled';
-
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
 
 export default function ReceiptsScreen() {
+
+  const { logout } = useContext(AuthContext);
+
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false} style={styles.scrollView}>
@@ -27,6 +31,11 @@ export default function ReceiptsScreen() {
 
         </View>
       </View>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <Pressable style={styles.shareBtn} onPress={() => logout()}>
+            <Text style={styles.shareBtnText}>Odjavi se</Text>
+          </Pressable>
+        </View>
         <StatusBar style="auto" />
       </ScrollView>
     </View>
