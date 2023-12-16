@@ -47,7 +47,9 @@ namespace WebApplication1.Entities
 		public bool EmailNotification { get; set; }
 
 		[Required]
+		public int FuelCombinationId { get; set; }
 
+		[ForeignKey(nameof(FuelCombinationId))]
 		public FuelCombination FuelCombination { get; set; }
 
 		[Required]

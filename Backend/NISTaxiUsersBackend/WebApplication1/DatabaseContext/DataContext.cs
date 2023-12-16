@@ -11,13 +11,14 @@ namespace WebApplication1.DatabaseContext
 
 		}
 
-		public DbSet<Driver> Drivers => Set<Driver>();
+		public DbSet<Driver> Drivers { get; set; }
 
-		public DbSet<Fuel> Fuels => Set<Fuel>();
+		public DbSet<Fuel> Fuels { get; set; }
 
-		public DbSet<FuelCombination> FuelCombinations => Set<FuelCombination>();
+		public DbSet<FuelCombination> FuelCombinations {  get; set; }
 		
-		public DbSet<TaxiTransaction> Transactions => Set<TaxiTransaction>();
+		public DbSet<TaxiTransaction> Transactions {  get; set; }
+
 
 	}
 }

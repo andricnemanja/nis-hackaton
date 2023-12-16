@@ -17,7 +17,7 @@ namespace WebApplication1.Repository
 
 		public Driver GetDriver(int id)
 		{
-			return _context.Drivers.Include(d => d.FuelCombination).FirstOrDefault(d => d.Id == id);
+			return _context.Drivers.Where(d => d.Id == id).FirstOrDefault();
 		}
 
 		public string GetDriversName(int id)

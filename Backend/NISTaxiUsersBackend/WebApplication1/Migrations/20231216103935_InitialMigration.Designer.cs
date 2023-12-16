@@ -12,8 +12,8 @@ using WebApplication1.DatabaseContext;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231216100148_FCombination")]
-    partial class FCombination
+    [Migration("20231216103935_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
