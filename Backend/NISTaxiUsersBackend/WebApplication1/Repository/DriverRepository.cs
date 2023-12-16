@@ -1,4 +1,5 @@
-﻿using WebApplication1.DatabaseContext;
+﻿using System.Data.Entity;
+using WebApplication1.DatabaseContext;
 using WebApplication1.Dto;
 using WebApplication1.Entities;
 using WebApplication1.RepositoryInterfaces;
@@ -16,7 +17,7 @@ namespace WebApplication1.Repository
 
 		public Driver GetDriver(int id)
 		{
-			return _context.Drivers.Where(d => d.Id == id).FirstOrDefault();
+			return _context.Drivers.Include(d => d.FuelCombination).FirstOrDefault(d => d.Id == id);
 		}
 
 		public string GetDriversName(int id)
